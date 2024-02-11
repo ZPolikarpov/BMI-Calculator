@@ -2,7 +2,7 @@
 
 .card {
   display: grid;
-  gap: $card-flow-spacing;
+  gap: var(--flow-spacing, $card-flow-spacing);
   padding: $card-padding;
   background-color: $card-background-default;
   font-family: $card-font-family;
