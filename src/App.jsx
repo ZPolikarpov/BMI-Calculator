@@ -25,7 +25,7 @@ function App() {
 							<div className="form-group">
 
 								<div className="radio-group">
-									<input id="metric" name="radio" type="radio" />
+									<input id="metric" name="radio" type="radio" checked />
 									<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
 								</div>
 
@@ -44,10 +44,10 @@ function App() {
 									<input name="weight" type="text" placeholder="0"/>
 								</div>
 
-								<div className="result | bg-primary-400 clr-neutral-000">
+								<div className="result">
 									<div>
 										<h3 className="heading-3 | clr-neutral-000">Welcome!</h3>
-										<p>Enter your height and weight and you’ll see your BMI result here</p>
+										<p className="margin-block-start-4">Enter your height and weight and you’ll see your BMI result here</p>
 									</div>
 								</div>
 							</div>

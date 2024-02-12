@@ -7,17 +7,20 @@
   grid-template-columns: 1fr 1fr;
 
   .radio-group {
+    grid-column: auto;
+
     display: flex;
     align-items: center;
-    grid-column: auto;
   }
 
   .input-group {
+    grid-column: span 2;
+    grid-row: auto;
+
     display: flex;
     position: relative;
     flex-direction: column;
-    grid-column: span 2;
-    grid-row: auto;
+    gap: $size-2;
 
     &::after {
       content: "";
@@ -42,9 +45,19 @@
   }
 
   .result {
-    display: flex;
     grid-column-start: 1;
     grid-column-end: -1;
+
+    display: flex;
+    padding: $size-8;
+    border-top-left-radius: $border-radius-2;
+    border-bottom-left-radius: $border-radius-2;
+    border-top-right-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+
+    font-size: $font-size-200;
+    background: linear-gradient(90deg, hsl(227, 92%, 58%), hsl(227, 100%, 67%));
+    color: $color-neutral-000;
   }
 
   @include mq("small") {
