@@ -3,6 +3,8 @@ import img_eatingMan from "./assets/images/image-man-eating.webp"
 import img_eating from "./assets/images/icon-eating.svg"
 import img_exercise from "./assets/images/icon-exercise.svg"
 import img_sleep from "./assets/images/icon-sleep.svg"
+import img_line_right from "./assets/images/pattern-curved-line-right.svg"
+import img_line_left from "./assets/images/pattern-curved-line-left.svg"
 
 function App() {
 	return (
@@ -56,15 +58,18 @@ function App() {
 				</div>
 			</section>
 
-			<section className="section">
-				<div className="container">
+			<section className="image-section">
+				<div className="image-section__container">
+					<img className="image-curve-left" src={img_line_left} alt="Line curved to the left" />
 
-				<div>
-					<img src={img_eatingMan} alt="A healthy looking smiling man in a white shirt holding a sushi roll with a pair of chopsticks" />
+				<div className="image-section__grid">
+					<div className="image-section__image">
+						<img src={img_eatingMan} alt="A healthy looking smiling man in a white shirt holding a sushi roll with a pair of chopsticks" />
+					</div>
 
-					<div>
+					<div className="image-section__description">
 						<h2 className="heading-2">What your BMI result means</h2>
-						<p>A BMI range of 18.5 to 24.9 is considered a &apos;healthy weight.&apos; Maintaining a healthy weight may lower your chances of experiencing health issues later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample fruits and vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.</p>
+						<p className="margin-block-start-8">A BMI range of 18.5 to 24.9 is considered a &apos;healthy weight.&apos; Maintaining a healthy weight may lower your chances of experiencing health issues later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample fruits and vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.</p>
 					</div>
 				</div>
 
