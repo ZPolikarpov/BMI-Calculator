@@ -18,6 +18,27 @@
     flex-direction: column;
     grid-column: span 2;
     grid-row: auto;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: $size-6;
+      bottom: $size-4;
+
+      @include heading(
+        $heading-3-font-size,
+        $color-primary-400,
+        $heading-3-line-height
+      );
+    }
+
+    &[data-unit="cm"]::after {
+      content: "cm";
+    }
+    &[data-unit="kg"]::after {
+      content: "kg";
+    }
   }
 
   .result {

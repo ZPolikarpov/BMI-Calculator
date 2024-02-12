@@ -20,7 +20,7 @@ function App() {
 							<h1 className="heading-1">Body Mass Index Calculator</h1>
 							<p className="margin-block-start-8">Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.</p>
 						</div>
-						<div className="card">
+						<div className="card" style={{"--flow-spacing": "2rem"}}>
 							<h3 className="card__heading | fs-600">Enter your details below</h3>
 							<div className="form-group">
 
@@ -34,14 +34,14 @@ function App() {
 									<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
 								</div>
 			
-								<div className="input-group">
+								<div className="input-group" data-unit="cm">
 									<label htmlFor="height">Height</label>
-									<input  name="height" type="number" placeholder="0"/>
+									<input  name="height" type="text" placeholder="0"/>
 								</div>
 
-								<div className="input-group">
+								<div className="input-group" data-unit="kg">
 									<label htmlFor="weight">Weight</label>
-									<input name="weight" type="number" placeholder="0"/>
+									<input name="weight" type="text" placeholder="0"/>
 								</div>
 
 								<div className="result | bg-primary-400 clr-neutral-000">
@@ -64,7 +64,7 @@ function App() {
 
 					<div>
 						<h2 className="heading-2">What your BMI result means</h2>
-						<p>A BMI range of 18.5 to 24.9 is considered a 'healthy weight.' Maintaining a healthy weight may lower your chances of experiencing health issues later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample fruits and vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.</p>
+						<p>A BMI range of 18.5 to 24.9 is considered a &apos;healthy weight.&apos; Maintaining a healthy weight may lower your chances of experiencing health issues later on, such as obesity and type 2 diabetes. Aim for a nutritious diet with reduced fat and sugar content, incorporating ample fruits and vegetables. Additionally, strive for regular physical activity, ideally about 30 minutes daily for five days a week.</p>
 					</div>
 				</div>
 
