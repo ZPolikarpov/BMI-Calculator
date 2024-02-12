@@ -16,7 +16,7 @@ function App() {
 					</header>
 
 					<main className="even-columns">
-						<div>
+						<div style={{"alignSelf": "center"}}>
 							<h1 className="heading-1">Body Mass Index Calculator</h1>
 							<p className="margin-block-start-8">Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.</p>
 						</div>
@@ -25,7 +25,7 @@ function App() {
 							<div className="form-group">
 
 								<div className="radio-group">
-									<input id="metric" name="radio" type="radio" checked />
+									<input id="metric" name="radio" type="radio" defaultChecked />
 									<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
 								</div>
 

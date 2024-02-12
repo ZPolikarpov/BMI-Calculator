@@ -1,5 +1,7 @@
 // global color tokens
 $-clr-blue-100: hsl(227, 92%, 58%, 15%);
+$-clr-blue-149: hsl(184, 95%, 92%, 0%);
+$-clr-blue-150: hsl(216, 95%, 92%);
 $-clr-blue-350: hsl(227, 100%, 67%);
 $-clr-blue-400: hsl(227, 92%, 58%);
 $-clr-gunmetal: hsl(215, 31%, 21%);
@@ -16,6 +18,8 @@ $light: (
   ),
   "primary": (
     "100": $-clr-blue-100,
+    "149": $-clr-blue-149,
+    "150": $-clr-blue-150,
     "350": $-clr-blue-350,
     "400": $-clr-blue-400,
   ),
@@ -28,5 +32,7 @@ $color-neutral-600: var(--neutral-600);
 $color-neutral-800: var(--neutral-800);
 
 $color-primary-100: var(--primary-100);
+$color-primary-149: var(--primary-149);
+$color-primary-150: var(--primary-150);
 $color-primary-350: var(--primary-350);
 $color-primary-400: var(--primary-400);
