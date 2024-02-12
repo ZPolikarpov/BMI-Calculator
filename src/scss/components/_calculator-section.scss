@@ -1,0 +1,49 @@
+@use "../abstracts" as *;
+
+.calculator-section {
+  padding-block: $size-9;
+
+  @include mq("medium") {
+    padding-block: 4.688rem;
+  }
+
+  &__header {
+    display: flex;
+    margin-bottom: $size-6;
+    justify-content: center;
+    background-color: hsl(0, 0%, 0%, 0%);
+
+    @include mq("small") {
+      margin-bottom: $size-9;
+    }
+
+    @include mq("medium") {
+      margin-bottom: $size-7;
+      justify-content: flex-start;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: var(--grid-gap, $size-8);
+
+    @include mq(medium) {
+      grid-template:
+        ". . b" 6.25rem
+        "a . b" 17.5rem
+        ". . b" auto / 5fr 1fr 6fr;
+      .card {
+        grid-area: b;
+      }
+    }
+  }
+
+  &__description {
+    text-align: center;
+
+    @include mq("medium") {
+      grid-area: a;
+      text-align: start;
+    }
+  }
+}

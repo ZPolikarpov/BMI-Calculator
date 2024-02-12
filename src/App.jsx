@@ -8,15 +8,15 @@ function App() {
 	return (
 		<>
 			<div className="background"></div>
-			<section className="section">
+			<section className="calculator-section">
 
 				<div className="container">
-					<header className="header">
+					<header className="calculator-section__header">
 						<img src={img_logo} alt="A blue circle outline with wavy lines inside inside of it and a smaller filled in circle in the center" />
 					</header>
 
-					<main className="even-columns">
-						<div style={{"alignSelf": "center"}}>
+					<main className="calculator-section__grid">
+						<div className="calculator-section__description">
 							<h1 className="heading-1">Body Mass Index Calculator</h1>
 							<p className="margin-block-start-8">Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.</p>
 						</div>

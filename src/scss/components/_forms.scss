@@ -50,10 +50,14 @@
 
     display: flex;
     padding: $size-8;
-    border-top-left-radius: $border-radius-2;
-    border-bottom-left-radius: $border-radius-2;
-    border-top-right-radius: 5rem;
-    border-bottom-right-radius: 5rem;
+    border-radius: $border-radius-2;
+
+    @include mq("small") {
+      border-top-left-radius: $border-radius-2;
+      border-bottom-left-radius: $border-radius-2;
+      border-top-right-radius: 5rem;
+      border-bottom-right-radius: 5rem;
+    }
 
     font-size: $font-size-200;
     background: linear-gradient(90deg, hsl(227, 92%, 58%), hsl(227, 100%, 67%));
