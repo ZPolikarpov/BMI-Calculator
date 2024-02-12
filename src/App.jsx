@@ -11,7 +11,7 @@ function App() {
 			<section className="section">
 
 				<div className="container">
-					<header>
+					<header className="header">
 						<img src={img_logo} alt="A blue circle outline with wavy lines inside inside of it and a smaller filled in circle in the center" />
 					</header>
 
@@ -21,8 +21,35 @@ function App() {
 							<p className="margin-block-start-8">Better understand your weight in relation to your height using our body mass index (BM) calculator. While BMI is not the sole determinant of a healthy weight, it offers a valuable starting point to evaluate your overall health and well-being.</p>
 						</div>
 						<div className="card">
-							<h3 className="card__heading | font-size-600">Enter your details below</h3>
-							<div className="flex-group">
+							<h3 className="card__heading | fs-600">Enter your details below</h3>
+							<div className="form-group">
+
+								<div className="radio-group">
+									<input id="metric" name="radio" type="radio" />
+									<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
+								</div>
+
+								<div className="radio-group">
+									<input id="imperial" name="radio" type="radio" />
+									<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
+								</div>
+			
+								<div className="input-group">
+									<label htmlFor="height">Height</label>
+									<input  name="height" type="number" placeholder="0"/>
+								</div>
+
+								<div className="input-group">
+									<label htmlFor="weight">Weight</label>
+									<input name="weight" type="number" placeholder="0"/>
+								</div>
+
+								<div className="result | bg-primary-400 clr-neutral-000">
+									<div>
+										<h3 className="heading-3 | clr-neutral-000">Welcome!</h3>
+										<p>Enter your height and weight and you’ll see your BMI result here</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</main>

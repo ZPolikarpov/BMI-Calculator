@@ -80,28 +80,28 @@ $card-background-default: $color-neutral-000;
 $card-color-default: $body-text-color;
 $card-font-family: $body-font-family;
 $card-line-height: $body-line-height;
-$card-heading-color-default: $card-color-default;
+$card-heading-color-default: $heading-color-default;
 $card-heading-font-size: $font-size-500;
 
 // forms
 $form-label-color: $body-text-color;
 $form-label-font-family: $body-font-family;
 $form-label-font-weight: $font-weight-semi-bold;
-$form-label-font-size: $body-font-size;
+$form-label-font-size: $font-size-200;
 
-$form-input-color: $body-text-color;
+$form-input-color: $color-neutral-800;
 $form-input-font-family: $body-font-family;
 $form-input-font-weight: $font-weight-semi-bold;
-$form-input-font-size: $body-font-size;
+$form-input-font-size: $font-size-500;
 $form-input-background-color: $color-neutral-000;
-$form-input-border-default: 3px solid $color-neutral-400;
-$form-input-border-focus: 3px solid $color-primary-400;
+$form-input-border-default: 1px solid $color-neutral-400;
+$form-input-border-focus: 1px solid $color-primary-400;
 $form-input-padding: $size-3;
 $form-input-border-radius: $border-radius-1;
 
-$form-placeholder-color: $color-primary-400;
+$form-placeholder-color: $color-neutral-400;
 $form-placeholder-font-family: $form-input-font-family;
 $form-placeholder-font-weight: $form-input-font-weight;
-$form-placeholder-font-size: $body-font-size;
+$form-placeholder-font-size: $form-input-font-size;
 
 $form-group-spacing: 0.5rem;

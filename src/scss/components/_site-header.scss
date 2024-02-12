@@ -16,3 +16,9 @@
     }
   }
 }
+
+.header {
+  display: flex;
+  margin-bottom: $size-7;
+  background-color: hsl(0, 0%, 0%, 0%);
+}
