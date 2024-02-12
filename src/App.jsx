@@ -76,7 +76,7 @@ function App() {
 				</div>
 			</section>
 
-			<section className="section">
+			<section className="advice-section">
 				<div className="container bg-neutral-400" data-type="full-bleed">
 					
 					<div className="even-columns">
