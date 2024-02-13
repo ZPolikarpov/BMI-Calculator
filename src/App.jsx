@@ -77,34 +77,34 @@ function App() {
 			</section>
 
 			<section className="advice-section">
-				<div className="container bg-neutral-400" data-type="full-bleed">
+				<div className="advice-section__container" data-type="full-bleed">
 					
-					<div className="even-columns">
+					<div className="even-columns" style={{"--grid-gap": "2.5rem", "--flex-row-gap": "2.5rem", "--flex-column-gap": "2.5rem"}}>
 
-						<div>
+						<div className="flex-group">
 							<img src={img_eating} alt="A bowl with food" />
 
 							<div>
 								<h3 className="heading-3">Healthy eating</h3>
-								<p>Healthy eating promotes weight control, disease prevention, better digestion, immunity, mental clarity, and mood.</p>
+								<p className="margin-block-start-6">Healthy eating promotes weight control, disease prevention, better digestion, immunity, mental clarity, and mood.</p>
 							</div>
 						</div>
 
-						<div>
+						<div className="flex-group">
 							<img src={img_exercise} alt="A dumbbell" />
 
 							<div>
 								<h3 className="heading-3">Regular exercise</h3>
-								<p>Exercise improves fitness, aids weight control, elevates mood, and reduces disease risk, fostering wellness and longevity.</p>
+								<p className="margin-block-start-6">Exercise improves fitness, aids weight control, elevates mood, and reduces disease risk, fostering wellness and longevity.</p>
 							</div>
 						</div>
 
-						<div>
+						<div className="flex-group">
 							<img src={img_sleep} alt="A half moon with stars" />
 
 							<div>
 								<h3 className="heading-3">Adequate sleep</h3>
-								<p>Sleep enhances mental clarity, emotional stability, and physical wellness, promoting overall restoration and rejuvenation.</p>
+								<p className="margin-block-start-6">Sleep enhances mental clarity, emotional stability, and physical wellness, promoting overall restoration and rejuvenation.</p>
 							</div>
 						</div>
 						

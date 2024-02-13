@@ -2,4 +2,43 @@
 
 .advice-section {
   margin-block-start: $size-13;
+
+  &__container {
+    --max-width: #{$container-max-width};
+    
+    width: min(100% - var(--padding), var(--max-width));
+    margin-inline: auto;
+    background: linear-gradient(-45deg, $color-primary-150, $color-primary-149);
+    
+    &[data-type="full-bleed"] {
+      --max-width: 100%;
+    }
+
+    padding-block: $size-10;
+    padding-inline: $size-6;
+    
+    @include mq("small") {
+      padding-block: 3.75rem;
+      padding-inline: $size-9;
+
+      .flex-group {
+        flex-wrap: nowrap;
+      }
+    }
+
+    @include mq("medium") {
+      padding-block: 5.25rem;
+      padding-inline: 7.25rem;
+      --padding: #{$container-min-margin-inline} * 2;
+      border-radius: $border-radius-4;
+
+      .even-columns {
+        --grid-gap: #{$size-8};
+      }
+
+      .flex-group {
+        flex-wrap: wrap;
+      }
+    }
+  }
 }
