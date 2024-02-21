@@ -1,0 +1,52 @@
+@use "../abstracts" as *;
+
+.last-flex-group {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: $size-4;
+  row-gap: $size-4;
+  width: fit-content;
+  justify-content: center;
+  @include mq("small") {
+    row-gap: $size-6;
+  }
+  @include mq("medium") {
+    column-gap: $size-8;
+  }
+  .text {
+    text-align: center;
+    flex: 1 1 100%;
+
+    @include mq(1208px) {
+      flex: 0 1 50%;
+      text-align: left;
+    }
+  }
+  .image__container {
+    display: none;
+    flex: 0 1 22.813rem;
+
+    @include mq(1208px) {
+      display: block;
+      position: relative;
+
+      img {
+        position: absolute;
+        left: 40%;
+        top: -13px;
+      }
+    }
+  }
+  .card {
+    flex: 0 1 20.438rem;
+    @include mq(1208px) {
+      flex: 0 1 22.813rem;
+
+      // hack to apply margin auto to first card
+      margin: auto;
+      & ~ .card {
+        margin: 0;
+      }
+    }
+  }
+}

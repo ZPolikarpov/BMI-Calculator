@@ -14,4 +14,10 @@
   &__heading {
     @include heading($card-heading-font-size, $card-heading-color-default);
   }
+
+  &__icon-header {
+    display: flex;
+    gap: $size-4;
+    align-items: center;
+  }
 }

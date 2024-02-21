@@ -5,6 +5,11 @@ import img_exercise from "./assets/images/icon-exercise.svg"
 import img_sleep from "./assets/images/icon-sleep.svg"
 import img_line_right from "./assets/images/pattern-curved-line-right.svg"
 import img_line_left from "./assets/images/pattern-curved-line-left.svg"
+import img_gender from "./assets/images/icon-gender.svg"
+import img_age from "./assets/images/icon-age.svg"
+import img_muscle from "./assets/images/icon-muscle.svg"
+import img_pregnancy from "./assets/images/icon-pregnancy.svg"
+import img_race from "./assets/images/icon-race.svg"
 
 function App() {
 	return (
@@ -115,7 +120,58 @@ function App() {
 
 			<section className="section">
 				<div className="container">
-					
+					<div className="last-flex-group test">
+
+						<div className="text">
+							<h2 className="heading-2">Limitations of BMI</h2>
+							<p className="margin-block-start-7">Although BMI is often a practical indicator of healthy weight, it is not suited for every person. Specific groups should carefully consider their BMI outcomes, and in certain cases, the measurement may not be beneficial to use.</p>
+						</div>
+
+						<div className="card">
+							<div className="card__icon-header">
+								<img src={img_gender} alt="A Sign portraing both genders" />
+								<h4 className="card__heading">Gender</h4>
+							</div>
+							<p>The development and body fat composition of girls and boys vary with age. Consequently, a child&apos;s age and gender are considered when evaluating their BMI.</p>
+						</div>
+
+						<div className="image__container">
+							<img src={img_line_right} alt="A line curved to the left" />
+						</div>
+
+						<div className="card">
+							<div className="card__icon-header">
+								<img src={img_age} alt="A picture of a cake" />
+								<h4 className="card__heading">Age</h4>
+							</div>
+							<p>In aging individuals, increased body fat and muscle loss may cause BMI to underestimate body fat content.</p>
+						</div>
+
+						<div className="card">
+							<div className="card__icon-header">
+								<img src={img_muscle} alt="A picture of a flexed biceps" />
+								<h4 className="card__heading">Muscle</h4>
+							</div>
+							<p>BMI may misclassify muscular individuals as overweight or obese, as it doesn&apos;t differentiate muscle from fat.</p>
+						</div>
+
+						<div className="card">
+							<div className="card__icon-header">
+								<img src={img_pregnancy} alt="A portrait of a baby" />
+								<h4 className="card__heading">Pregnancy</h4>
+							</div>
+							<p>Expectant mothers experience weight gain due to their growing baby. Maintaining a healthy pre-pregnancy BMI is advisable to minimise health risks for both mother and child.</p>
+						</div>
+
+						<div className="card">
+							<div className="card__icon-header">
+								<img src={img_race} alt="A picture of a human" />
+								<h4 className="card__heading">Race</h4>
+							</div>
+							<p>Certain health concerns may affect individuals of some Black and Asian origins at lower BMIs than others. To learn more, it is advised to discuss this with your GP or practice nurse.</p>
+						</div>
+
+					</div>
 				</div>
 			</section>
 		</>
