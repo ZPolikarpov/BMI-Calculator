@@ -17,9 +17,11 @@
     grid-column: span 2;
     grid-row: auto;
 
+    min-width: 0;
     display: flex;
     position: relative;
     flex-direction: column;
+    justify-content: end;
     gap: $size-2;
 
     &::after {
@@ -42,6 +44,22 @@
     &[data-unit="kg"]::after {
       content: "kg";
     }
+    &[data-unit="ft"]::after {
+      content: "ft";
+    }
+    &[data-unit="in"]::after {
+      content: "in";
+    }
+    &[data-unit="st"]::after {
+      content: "st";
+    }
+    &[data-unit="lbs"]::after {
+      content: "lbs";
+    }
+  }
+
+  &[data-type="imperial"] .input-group {
+    grid-column: auto;
   }
 
   .result {
@@ -67,7 +85,12 @@
   @include mq("small") {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: $size-6;
+
     .radio-group {
+      grid-column: span 2;
+    }
+
+    &[data-type="imperial"] .input-group {
       grid-column: span 2;
     }
   }

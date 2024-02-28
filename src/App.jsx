@@ -11,7 +11,48 @@ import img_muscle from "./assets/images/icon-muscle.svg"
 import img_pregnancy from "./assets/images/icon-pregnancy.svg"
 import img_race from "./assets/images/icon-race.svg"
 
+import { useState } from "react"
+
+function renderInputs(unit) {
+	if (unit === "metric") {
+		return <>
+			<div className="input-group" data-unit="cm">
+				<label htmlFor="height">Height</label>
+				<input  name="height" type="text" placeholder="0"/>
+			</div>
+
+			<div className="input-group" data-unit="kg">
+				<label htmlFor="weight">Weight</label>
+				<input name="weight" type="text" placeholder="0"/>
+			</div>
+		</>
+	} else if (unit === "imperial"){
+		return <>
+			<div className="input-group" data-unit="ft">
+				<label htmlFor="height">Height</label>
+				<input name="height" type="text" placeholder="0"/>
+			</div>
+
+			<div className="input-group" data-unit="in">
+				<input name="height" type="text" placeholder="0"/>
+			</div>
+
+			<div className="input-group" data-unit="st">
+				<label htmlFor="weight">Weight</label>
+				<input name="weight" type="text" placeholder="0"/>
+			</div>
+
+			<div className="input-group" data-unit="lbs">
+				<input name="weight" type="text" placeholder="0"/>
+			</div>
+		</>
+	}
+}
+
 function App() {
+	const [unit, setUnit] = useState("metric")
+
+
 	return (
 		<>
 			<div className="background"></div>
@@ -29,27 +70,19 @@ function App() {
 						</div>
 						<div className="card" style={{"--flow-spacing": "2rem"}}>
 							<h3 className="card__heading | fs-600">Enter your details below</h3>
-							<div className="form-group">
+							<div className="form-group" data-type={unit}>
 
 								<div className="radio-group">
-									<input id="metric" name="radio" type="radio" defaultChecked />
+									<input id="metric" name="radio" type="radio" defaultChecked={unit === "metric"} onChange={() => setUnit("metric")} />
 									<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
 								</div>
 
 								<div className="radio-group">
-									<input id="imperial" name="radio" type="radio" />
+									<input id="imperial" name="radio" type="radio" defaultChecked={unit === "imperial"} onChange={() => setUnit("imperial")} />
 									<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
 								</div>
-			
-								<div className="input-group" data-unit="cm">
-									<label htmlFor="height">Height</label>
-									<input  name="height" type="text" placeholder="0"/>
-								</div>
 
-								<div className="input-group" data-unit="kg">
-									<label htmlFor="weight">Weight</label>
-									<input name="weight" type="text" placeholder="0"/>
-								</div>
+								{renderInputs(unit)}
 
 								<div className="result">
 									<div>
