@@ -13,45 +13,137 @@ import img_race from "./assets/images/icon-race.svg"
 
 import { useState } from "react"
 
-function renderInputs(unit) {
-	if (unit === "metric") {
+function RenderResults(result, idealWeight) {
+	if (!result) {
 		return <>
-			<div className="input-group" data-unit="cm">
-				<label htmlFor="height">Height</label>
-				<input  name="height" type="text" placeholder="0"/>
-			</div>
-
-			<div className="input-group" data-unit="kg">
-				<label htmlFor="weight">Weight</label>
-				<input name="weight" type="text" placeholder="0"/>
+			<div className="result">
+				<div>
+					<h3 className="heading-3 | clr-neutral-000">Welcome!</h3>
+					<p className="margin-block-start-4">Enter your height and weight and you’ll see your BMI result here</p>
+				</div>
 			</div>
 		</>
-	} else if (unit === "imperial"){
+	} else {
 		return <>
-			<div className="input-group" data-unit="ft">
-				<label htmlFor="height">Height</label>
-				<input name="height" type="text" placeholder="0"/>
-			</div>
-
-			<div className="input-group" data-unit="in">
-				<input name="height" type="text" placeholder="0"/>
-			</div>
-
-			<div className="input-group" data-unit="st">
-				<label htmlFor="weight">Weight</label>
-				<input name="weight" type="text" placeholder="0"/>
-			</div>
-
-			<div className="input-group" data-unit="lbs">
-				<input name="weight" type="text" placeholder="0"/>
+			<div className="result">
+				<div style={{ width: "50%" }}>
+					<h3 className="heading-3 | clr-neutral-000">Your BMI is...</h3>
+					<p className="heading-1 | clr-neutral-000">{result}</p>
+				</div>
+				<p style={{ width: "50%" }} className="clr-neutral-000">Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="fw-semibold">{idealWeight}.</span></p>
 			</div>
 		</>
 	}
 }
+function BMICalculator(unit, setUnit) {
+	
+	const [result, setResult] = useState(null)
+	const [height, setHeight] = useState(0)
+	const [weight, setWeight] = useState(0)
+	const [idealWeight, setIdealWeight] = useState('')
+
+	function calculateHeight(iValue) {
+		setHeight(iValue)
+		calculateBMI(iValue, weight)
+	}
+	
+	function calculateWeight(iValue) {
+		setWeight(iValue)
+		calculateBMI(height, iValue)
+	}
+	
+	function calculateBMI(height, weight) {
+		let bmi;
+		if (unit === 'metric') {
+			bmi = (weight / (height / 100) ** 2).toFixed(1);
+		} else {
+			bmi = (703 * weight / (height * 12) ** 2).toFixed(1); 
+		}
+		setIdealWeight(calculateWeightRange(bmi, height));
+		setResult(bmi);
+	}
+	function calculateWeightRange(bmi, height) {
+    let minWeight, maxWeight;
+
+    if (unit === 'metric') {
+      minWeight = (bmi * (height * height) / 10000).toFixed(1);
+      maxWeight = (minWeight + 4.9).toFixed(1);
+    } else {
+      minWeight = (bmi * (height * height) * 703).toFixed(1);
+      maxWeight = (minWeight + 11).toFixed(1);
+    }
+
+    return `${minWeight} - ${maxWeight}`;
+  }
+
+
+
+	if (unit === "metric") {
+		return <>
+			<div className="radio-group">
+				<input id="metric" name="radio" type="radio" checked={unit === "metric"} onChange={() => setUnit("metric")} />
+				<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
+			</div>
+
+			<div className="radio-group">
+				<input id="imperial" name="radio" type="radio" checked={unit === "imperial"} onChange={() => setUnit("imperial")} />
+				<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
+			</div>
+			<div className="input-group" data-unit="cm">
+				<label htmlFor="height">Height</label>
+				<input name="height" type="text" placeholder="0" value={height} onChange={(e) => calculateHeight(e.target.value)}/>
+			</div>
+
+			<div className="input-group" data-unit="kg">
+				<label htmlFor="weight">Weight</label>
+				<input name="weight" type="text" placeholder="0" value={weight} onChange={(e) => calculateWeight(e.target.value)}/>
+			</div>
+			
+			{RenderResults(result, idealWeight)}
+		</>
+	} else if (unit === "imperial"){
+		return <>
+			<div className="radio-group">
+				<input id="metric" name="radio" type="radio" checked={unit === "metric"} onChange={() => setUnit("metric")} />
+				<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
+			</div>
+
+			<div className="radio-group">
+				<input id="imperial" name="radio" type="radio" checked={unit === "imperial"} onChange={() => setUnit("imperial")} />
+				<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
+			</div>
+			<div className="input-group" data-unit="ft">
+				<label htmlFor="height">Height</label>
+				<input name="height" type="text" placeholder="0" 
+					value={Math.floor(height / 12)} onChange={e => calculateHeight(e.target.value * 12)} />
+			</div>
+
+			<div className="input-group" data-unit="in">
+				<input name="height" type="text" placeholder="0" 
+					value={height % 12} onChange={e => setHeight(e.target.value + Math.floor(height / 12) * 12)}/>
+			</div>
+
+			<div className="input-group" data-unit="st">
+				<label htmlFor="weight">Weight</label>
+				<input name="weight" type="text" placeholder="0" 
+					value={Math.floor(weight / 16)} 
+					onChange={e => setWeight(e.target.value * 16)}/>
+			</div>
+
+			<div className="input-group" data-unit="lbs">
+				<input name="weight" type="text" placeholder="0"
+					value={weight % 16}
+					onChange={e => setWeight(e.target.value + Math.floor(weight / 16) * 16)} />
+			</div>
+			
+			{RenderResults(result, idealWeight)}
+		</>
+	}
+}
+
 
 function App() {
 	const [unit, setUnit] = useState("metric")
-
 
 	return (
 		<>
@@ -72,24 +164,9 @@ function App() {
 							<h3 className="card__heading | fs-600">Enter your details below</h3>
 							<div className="form-group" data-type={unit}>
 
-								<div className="radio-group">
-									<input id="metric" name="radio" type="radio" defaultChecked={unit === "metric"} onChange={() => setUnit("metric")} />
-									<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
-								</div>
+								
 
-								<div className="radio-group">
-									<input id="imperial" name="radio" type="radio" defaultChecked={unit === "imperial"} onChange={() => setUnit("imperial")} />
-									<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
-								</div>
-
-								{renderInputs(unit)}
-
-								<div className="result">
-									<div>
-										<h3 className="heading-3 | clr-neutral-000">Welcome!</h3>
-										<p className="margin-block-start-4">Enter your height and weight and you’ll see your BMI result here</p>
-									</div>
-								</div>
+								{BMICalculator(unit, setUnit)}
 							</div>
 						</div>
 					</main>

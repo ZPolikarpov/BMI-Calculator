@@ -21,7 +21,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     gap: $size-2;
 
     &::after {
