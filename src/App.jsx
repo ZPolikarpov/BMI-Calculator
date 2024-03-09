@@ -11,7 +11,7 @@ import img_muscle from "./assets/images/icon-muscle.svg"
 import img_pregnancy from "./assets/images/icon-pregnancy.svg"
 import img_race from "./assets/images/icon-race.svg"
 
-import { useState } from "react"
+import { useState, useReducer } from "react"
 
 function RenderResults(result, idealWeight) {
 	if (!result) {
@@ -35,108 +35,132 @@ function RenderResults(result, idealWeight) {
 		</>
 	}
 }
-function BMICalculator(unit, setUnit) {
-	
-	const [result, setResult] = useState(null)
-	const [height, setHeight] = useState(0)
-	const [weight, setWeight] = useState(0)
-	const [idealWeight, setIdealWeight] = useState('')
 
-	function calculateHeight(iValue) {
-		setHeight(iValue)
-		calculateBMI(iValue, weight)
-	}
+function BMICalculator(unit) {
 	
-	function calculateWeight(iValue) {
-		setWeight(iValue)
-		calculateBMI(height, iValue)
-	}
-	
-	function calculateBMI(height, weight) {
-		let bmi;
-		if (unit === 'metric') {
-			bmi = (weight / (height / 100) ** 2).toFixed(1);
-		} else {
-			bmi = (703 * weight / (height * 12) ** 2).toFixed(1); 
+	const [bmi, dispatchBMI] = useReducer(function (state, action) {
+		let heightCm= state.heightCm,
+				weightKg= state.weightKg,
+
+				heightFt= state.heightFt,
+				heightIn= state.heightIn,
+				weightSt= state.weightSt,
+				weightLb= state.weightLb,
+				result= state.result,
+				idealWeightRange= state.idealWeightRange;
+
+		switch (action.type) {
+			case "changeHeight":
+				if (action.payload <= 0) {
+					heightCm = "";
+					heightFt = "";
+					heightIn = "";
+				} else {
+					heightCm = Math.floor(action.payload);
+					heightFt = Math.floor(action.payload / 30.48);
+					heightIn = Math.floor(action.payload % 30.48 / 2.54);
+				}
+				break;
+			case "changeWeight":
+				if (action.payload <= 0) {
+					weightKg = "";
+					weightSt = "";
+					weightLb = "";
+				} else {
+					weightKg = Math.floor(action.payload);
+					weightSt = Math.floor(action.payload / 6.350293197);
+					weightLb = Math.floor(action.payload % 6.350293197 * 2.20462);
+				}
+				break;
+			default:
+				break;
 		}
-		setIdealWeight(calculateWeightRange(bmi, height));
-		setResult(bmi);
-	}
+
+		if (weightKg > 0 && heightCm > 0) {
+			result = parseFloat((weightKg / (heightCm / 100) ** 2).toFixed(2));
+			idealWeightRange = calculateWeightRange(result, heightCm);
+		} else {
+			result = null;
+		}
+
+		return {
+			heightCm,
+			weightKg,
+
+			heightFt,
+			heightIn,
+			weightSt,
+			weightLb,
+			result,
+			idealWeightRange
+		};
+	}, {
+		heightCm: "",
+		weightKg: "",
+
+		heightFt: "",
+		heightIn: "",
+		weightSt: "",
+		weightLb: "",
+		result: 0,
+		idealWeightRange: "",
+	})
+
 	function calculateWeightRange(bmi, height) {
     let minWeight, maxWeight;
 
     if (unit === 'metric') {
-      minWeight = (bmi * (height * height) / 10000).toFixed(1);
-      maxWeight = (minWeight + 4.9).toFixed(1);
+      minWeight = (bmi * (height / 100) ** 2).toFixed(1);
+      maxWeight = (parseFloat(minWeight) + 4.9).toFixed(1);
     } else {
       minWeight = (bmi * (height * height) * 703).toFixed(1);
-      maxWeight = (minWeight + 11).toFixed(1);
+      maxWeight = (parseFloat(minWeight + 11)).toFixed(1);
     }
 
     return `${minWeight} - ${maxWeight}`;
   }
 
-
-
 	if (unit === "metric") {
 		return <>
-			<div className="radio-group">
-				<input id="metric" name="radio" type="radio" checked={unit === "metric"} onChange={() => setUnit("metric")} />
-				<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
-			</div>
-
-			<div className="radio-group">
-				<input id="imperial" name="radio" type="radio" checked={unit === "imperial"} onChange={() => setUnit("imperial")} />
-				<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
-			</div>
 			<div className="input-group" data-unit="cm">
 				<label htmlFor="height">Height</label>
-				<input name="height" type="text" placeholder="0" value={height} onChange={(e) => calculateHeight(e.target.value)}/>
+				<input name="height" type="number" placeholder="0" value={bmi.heightCm} onChange={(e) => dispatchBMI({ type:"changeHeight", payload: e.target.value})}/>
 			</div>
 
 			<div className="input-group" data-unit="kg">
 				<label htmlFor="weight">Weight</label>
-				<input name="weight" type="text" placeholder="0" value={weight} onChange={(e) => calculateWeight(e.target.value)}/>
+				<input name="weight" type="number" placeholder="0" value={bmi.weightKg} onChange={(e) => dispatchBMI({ type:"changeWeight", payload: e.target.value})}/>
 			</div>
 			
-			{RenderResults(result, idealWeight)}
+			{RenderResults(bmi.result, bmi.idealWeightRange)}
 		</>
 	} else if (unit === "imperial"){
 		return <>
-			<div className="radio-group">
-				<input id="metric" name="radio" type="radio" checked={unit === "metric"} onChange={() => setUnit("metric")} />
-				<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
-			</div>
-
-			<div className="radio-group">
-				<input id="imperial" name="radio" type="radio" checked={unit === "imperial"} onChange={() => setUnit("imperial")} />
-				<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
-			</div>
 			<div className="input-group" data-unit="ft">
 				<label htmlFor="height">Height</label>
-				<input name="height" type="text" placeholder="0" 
-					value={Math.floor(height / 12)} onChange={e => calculateHeight(e.target.value * 12)} />
+				<input name="height" type="number" placeholder="0" 
+					value={bmi.heightFt} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 30.48 + bmi.heightIn * 2.54 })} />
 			</div>
 
 			<div className="input-group" data-unit="in">
-				<input name="height" type="text" placeholder="0" 
-					value={height % 12} onChange={e => setHeight(e.target.value + Math.floor(height / 12) * 12)}/>
+				<input name="height" type="number" placeholder="0" 
+					value={bmi.heightIn} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 2.54 + bmi.heightFt * 30.48})}/>
 			</div>
 
 			<div className="input-group" data-unit="st">
 				<label htmlFor="weight">Weight</label>
-				<input name="weight" type="text" placeholder="0" 
-					value={Math.floor(weight / 16)} 
-					onChange={e => setWeight(e.target.value * 16)}/>
+				<input name="weight" type="number" placeholder="0" 
+					value={bmi.weightSt} 
+					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value / 2.20462 + bmi.weightLb * 14})} />
 			</div>
 
 			<div className="input-group" data-unit="lbs">
-				<input name="weight" type="text" placeholder="0"
-					value={weight % 16}
-					onChange={e => setWeight(e.target.value + Math.floor(weight / 16) * 16)} />
+				<input name="weight" type="number" placeholder="0"
+					value={bmi.weightLb}
+					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value * 14 + bmi.weightSt * 6.350293197})} />
 			</div>
 			
-			{RenderResults(result, idealWeight)}
+			{RenderResults(bmi.result, bmi.idealWeightRange)}
 		</>
 	}
 }
@@ -163,8 +187,15 @@ function App() {
 						<div className="card" style={{"--flow-spacing": "2rem"}}>
 							<h3 className="card__heading | fs-600">Enter your details below</h3>
 							<div className="form-group" data-type={unit}>
+								<div className="radio-group">
+									<input id="metric" name="radio" type="radio" checked={unit === "metric"} onChange={() => setUnit("metric")} />
+									<label className="clr-neutral-800 fs-400" htmlFor="metric">Metric</label>
+								</div>
 
-								
+								<div className="radio-group">
+									<input id="imperial" name="radio" type="radio" checked={unit === "imperial"} onChange={() => setUnit("imperial")} />
+									<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
+								</div>
 
 								{BMICalculator(unit, setUnit)}
 							</div>
