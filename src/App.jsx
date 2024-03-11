@@ -56,9 +56,9 @@ function BMICalculator(unit) {
 					heightFt = "";
 					heightIn = "";
 				} else {
-					heightCm = Math.floor(action.payload);
-					heightFt = Math.floor(action.payload / 30.48);
-					heightIn = Math.floor(action.payload % 30.48 / 2.54);
+					heightCm = Math.round(action.payload);
+					heightFt = Math.floor(action.payload / 30.479999999999993);
+					heightIn = Math.round(action.payload % 30.479999999999993 / 2.54);
 				}
 				break;
 			case "changeWeight":
@@ -67,18 +67,25 @@ function BMICalculator(unit) {
 					weightSt = "";
 					weightLb = "";
 				} else {
-					weightKg = Math.floor(action.payload);
-					weightSt = Math.floor(action.payload / 6.350293197);
-					weightLb = Math.floor(action.payload % 6.350293197 * 2.20462);
+					weightKg = Math.round(action.payload);
+					weightSt = Math.floor(action.payload / 6.3503);
+					weightLb = Math.round(action.payload % 6.35 * 2.20462);
 				}
 				break;
 			default:
 				break;
 		}
 
+		if (weightLb <= 0) {
+			weightLb = "";
+		}
+		if (heightIn <= 0) {
+			heightIn = "";
+		}
+
 		if (weightKg > 0 && heightCm > 0) {
 			result = parseFloat((weightKg / (heightCm / 100) ** 2).toFixed(2));
-			idealWeightRange = calculateWeightRange(result, heightCm);
+			idealWeightRange = calculateWeightRange(heightCm);
 		} else {
 			result = null;
 		}
@@ -106,15 +113,18 @@ function BMICalculator(unit) {
 		idealWeightRange: "",
 	})
 
-	function calculateWeightRange(bmi, height) {
+	function calculateWeightRange(height) {
     let minWeight, maxWeight;
 
     if (unit === 'metric') {
-      minWeight = (bmi * (height / 100) ** 2).toFixed(1);
-      maxWeight = (parseFloat(minWeight) + 4.9).toFixed(1);
+      minWeight = (18.5 * (height / 100) ** 2).toFixed(1) + "kg";
+      maxWeight = (24.9 * (height / 100) ** 2).toFixed(1) + "kg";
     } else {
-      minWeight = (bmi * (height * height) * 703).toFixed(1);
-      maxWeight = (parseFloat(minWeight + 11)).toFixed(1);
+      minWeight = (18.5 * (height / 100) ** 2).toFixed(1);
+			minWeight = `${Math.floor(minWeight / 6.3503)}st ${Math.round(minWeight % 6.35 * 2.20462)}lb`
+
+      maxWeight = (24.9 * (height / 100) ** 2).toFixed(1);
+			maxWeight = `${Math.floor(maxWeight / 6.3503)}st ${Math.round(maxWeight % 6.35 * 2.20462)}lb`
     }
 
     return `${minWeight} - ${maxWeight}`;
@@ -139,25 +149,25 @@ function BMICalculator(unit) {
 			<div className="input-group" data-unit="ft">
 				<label htmlFor="height">Height</label>
 				<input name="height" type="number" placeholder="0" 
-					value={bmi.heightFt} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 30.48 + bmi.heightIn * 2.54 })} />
+					value={bmi.heightFt} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 30.479999999999993 + bmi.heightIn * 2.54 })} />
 			</div>
 
 			<div className="input-group" data-unit="in">
 				<input name="height" type="number" placeholder="0" 
-					value={bmi.heightIn} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 2.54 + bmi.heightFt * 30.48})}/>
+					value={bmi.heightIn} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 2.54 + bmi.heightFt * 30.479999999999993})}/>
 			</div>
 
 			<div className="input-group" data-unit="st">
 				<label htmlFor="weight">Weight</label>
 				<input name="weight" type="number" placeholder="0" 
 					value={bmi.weightSt} 
-					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value / 2.20462 + bmi.weightLb * 14})} />
+					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value * 6.3503 + bmi.weightLb * 2.20462})} />
 			</div>
 
 			<div className="input-group" data-unit="lbs">
 				<input name="weight" type="number" placeholder="0"
 					value={bmi.weightLb}
-					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value * 14 + bmi.weightSt * 6.350293197})} />
+					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value / 2.20462 + bmi.weightSt * 6.3503})} />
 			</div>
 			
 			{RenderResults(bmi.result, bmi.idealWeightRange)}
