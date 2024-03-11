@@ -13,8 +13,20 @@ import img_race from "./assets/images/icon-race.svg"
 
 import { useState, useReducer } from "react"
 
-function RenderResults(result, idealWeight) {
-	if (!result) {
+function RenderResults(iResult, idealWeight) {
+	let sEvaluation;
+
+	if (iResult < 18.5) {
+			sEvaluation = "underweight"
+	}
+	else if(iResult > 24.9) {
+		sEvaluation = "overweight"
+	}
+	else {
+		sEvaluation = "a healthy weight"
+	}
+
+	if (!iResult) {
 		return <>
 			<div className="result">
 				<div>
@@ -28,9 +40,9 @@ function RenderResults(result, idealWeight) {
 			<div className="result">
 				<div style={{ width: "50%" }}>
 					<h3 className="heading-3 | clr-neutral-000">Your BMI is...</h3>
-					<p className="heading-1 | clr-neutral-000">{result}</p>
+					<p className="heading-1 | clr-neutral-000">{iResult}</p>
 				</div>
-				<p style={{ width: "50%" }} className="clr-neutral-000">Your BMI suggests you’re a healthy weight. Your ideal weight is between <span className="fw-semibold">{idealWeight}.</span></p>
+				<p style={{ width: "50%", alignSelf: "center" }} className="clr-neutral-000">Your BMI suggests you’re {sEvaluation}. Your ideal weight is between <span className="fw-semibold">{idealWeight}.</span></p>
 			</div>
 		</>
 	}
@@ -46,8 +58,7 @@ function BMICalculator(unit) {
 				heightIn= state.heightIn,
 				weightSt= state.weightSt,
 				weightLb= state.weightLb,
-				result= state.result,
-				idealWeightRange= state.idealWeightRange;
+				result= state.result;
 
 		switch (action.type) {
 			case "changeHeight":
@@ -85,7 +96,6 @@ function BMICalculator(unit) {
 
 		if (weightKg > 0 && heightCm > 0) {
 			result = parseFloat((weightKg / (heightCm / 100) ** 2).toFixed(2));
-			idealWeightRange = calculateWeightRange(heightCm);
 		} else {
 			result = null;
 		}
@@ -99,7 +109,6 @@ function BMICalculator(unit) {
 			weightSt,
 			weightLb,
 			result,
-			idealWeightRange
 		};
 	}, {
 		heightCm: "",
@@ -142,7 +151,7 @@ function BMICalculator(unit) {
 				<input name="weight" type="number" placeholder="0" value={bmi.weightKg} onChange={(e) => dispatchBMI({ type:"changeWeight", payload: e.target.value})}/>
 			</div>
 			
-			{RenderResults(bmi.result, bmi.idealWeightRange)}
+			{RenderResults(bmi.result, calculateWeightRange(bmi.heightCm))}
 		</>
 	} else if (unit === "imperial"){
 		return <>
@@ -170,7 +179,7 @@ function BMICalculator(unit) {
 					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value / 2.20462 + bmi.weightSt * 6.3503})} />
 			</div>
 			
-			{RenderResults(bmi.result, bmi.idealWeightRange)}
+			{RenderResults(bmi.result, calculateWeightRange(bmi.heightCm))}
 		</>
 	}
 }
@@ -207,7 +216,7 @@ function App() {
 									<label className="clr-neutral-800 fs-400" htmlFor="imperial">Imperial</label>
 								</div>
 
-								{BMICalculator(unit, setUnit)}
+								{BMICalculator(unit)}
 							</div>
 						</div>
 					</main>
