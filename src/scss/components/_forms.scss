@@ -67,10 +67,16 @@
     grid-column-end: -1;
 
     display: flex;
+    flex-direction: column;
+    row-gap: $size-6;
     padding: $size-8;
     border-radius: $border-radius-2;
 
     @include mq("small") {
+      > * {
+        width: 50%;
+      }
+      flex-direction: row;
       border-top-left-radius: $border-radius-2;
       border-bottom-left-radius: $border-radius-2;
       border-top-right-radius: 5rem;

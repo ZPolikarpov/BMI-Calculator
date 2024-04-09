@@ -38,11 +38,11 @@ function RenderResults(iResult, idealWeight) {
 	} else {
 		return <>
 			<div className="result">
-				<div style={{ width: "50%" }}>
+				<div>
 					<h3 className="heading-3 | clr-neutral-000">Your BMI is...</h3>
-					<p className="heading-1 | clr-neutral-000">{iResult}</p>
+					<p className="result__bmi | clr-neutral-000">{iResult}</p>
 				</div>
-				<p style={{ width: "50%", alignSelf: "center" }} className="clr-neutral-000">Your BMI suggests you’re {sEvaluation}. Your ideal weight is between <span className="fw-semibold">{idealWeight}.</span></p>
+				<p style={{ alignSelf: "center" }} className="clr-neutral-000">Your BMI suggests you’re {sEvaluation}. Your ideal weight is between <span className="fw-semibold">{idealWeight}.</span></p>
 			</div>
 		</>
 	}
