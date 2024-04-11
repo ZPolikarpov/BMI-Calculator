@@ -4,7 +4,7 @@ This is a solution to the BMI-Calculator challenge on Frontend Mentor.
 
 ### Links
 
-Solution URL: [Solution - Frontend Mentor](https://www.frontendmentor.io/solutions/interactive-rating-component-using-scss-and-react-kGg54tf4RL)\
+Solution URL: [Solution - Frontend Mentor](https://www.frontendmentor.io/solutions/bmicalculator-J9ZTBFdmiE)\
 Live Site URL: [Live Site](https://zpolikarpov.github.io/BMI-Calculator/)\
 \
 
