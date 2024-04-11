@@ -73,14 +73,17 @@
     border-radius: $border-radius-2;
 
     @include mq("small") {
-      > * {
-        width: 50%;
-      }
       flex-direction: row;
       border-top-left-radius: $border-radius-2;
       border-bottom-left-radius: $border-radius-2;
       border-top-right-radius: 5rem;
       border-bottom-right-radius: 5rem;
+      
+      &[data-type="even-column"] {
+        > * {
+          width: 50%;
+        }
+      }
     }
 
     font-size: $font-size-200;

@@ -37,10 +37,10 @@ function RenderResults(iResult, idealWeight) {
 		</>
 	} else {
 		return <>
-			<div className="result">
+			<div className="result" data-type="even-column">
 				<div>
-					<h3 className="heading-3 | clr-neutral-000">Your BMI is...</h3>
-					<p className="result__bmi | clr-neutral-000">{iResult}</p>
+					<h3 className="clr-neutral-000 fw-semibold fs-400">Your BMI is...</h3>
+					<p className="heading-1 | clr-neutral-000 margin-block-start-2">{iResult}</p>
 				</div>
 				<p style={{ alignSelf: "center" }} className="clr-neutral-000">Your BMI suggests you’re {sEvaluation}. Your ideal weight is between <span className="fw-semibold">{idealWeight}.</span></p>
 			</div>
@@ -142,12 +142,12 @@ function BMICalculator(unit) {
 	if (unit === "metric") {
 		return <>
 			<div className="input-group" data-unit="cm">
-				<label htmlFor="height">Height</label>
+				<label className="fw-regular" htmlFor="height">Height</label>
 				<input name="height" type="number" placeholder="0" value={bmi.heightCm} onChange={(e) => dispatchBMI({ type:"changeHeight", payload: e.target.value})}/>
 			</div>
 
 			<div className="input-group" data-unit="kg">
-				<label htmlFor="weight">Weight</label>
+				<label className="fw-regular" htmlFor="weight">Weight</label>
 				<input name="weight" type="number" placeholder="0" value={bmi.weightKg} onChange={(e) => dispatchBMI({ type:"changeWeight", payload: e.target.value})}/>
 			</div>
 			
@@ -156,7 +156,7 @@ function BMICalculator(unit) {
 	} else if (unit === "imperial"){
 		return <>
 			<div className="input-group" data-unit="ft">
-				<label htmlFor="height">Height</label>
+				<label className="fw-regular" htmlFor="height">Height</label>
 				<input name="height" type="number" placeholder="0" 
 					value={bmi.heightFt} onChange={e => dispatchBMI({ type:"changeHeight", payload: e.target.value * 30.479999999999993 + bmi.heightIn * 2.54 })} />
 			</div>
@@ -167,7 +167,7 @@ function BMICalculator(unit) {
 			</div>
 
 			<div className="input-group" data-unit="st">
-				<label htmlFor="weight">Weight</label>
+				<label className="fw-regular" htmlFor="weight">Weight</label>
 				<input name="weight" type="number" placeholder="0" 
 					value={bmi.weightSt} 
 					onChange={e => dispatchBMI({ type:"changeWeight", payload: e.target.value * 6.3503 + bmi.weightLb * 2.20462})} />
