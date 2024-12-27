@@ -1,56 +1,104 @@
-# BMI-Calculator
+# Frontend Mentor Challenge - BMI Calculator
 
-This is a solution to the BMI-Calculator challenge on Frontend Mentor.
+This repository contains my solution for a Frontend Mentor challenge. The challenge required building a fully responsive website from a given Figma design.
 
-### Links
+## Links
 
 Solution URL: [Solution - Frontend Mentor](https://www.frontendmentor.io/solutions/bmicalculator-J9ZTBFdmiE)\
-Live Site URL: [Live Site](https://zpolikarpov.github.io/BMI-Calculator/)\
-\
+Live Site URL: [Live Site](https://zpolikarpov.github.io/BMI-Calculator/)
 
-To run the project:
+## Built With
+- **Vite** - A fast frontend build tool for modern web development
+- **React** - JavaScript library for building user interfaces
+- **SCSS** - CSS preprocessor for writing cleaner and more maintainable styles
+- **HTML** - Markup language for structuring the website
+- **JavaScript (JS)** - For dynamic behavior and interactivity
 
-- Clone the repository
-- Console: npm install
-- Console: npm run dev
+## Features
+- **Fully Responsive Design**: Adapts seamlessly to different screen sizes and devices.
+- **Pixel-Perfect Implementation**: Faithful to the original Figma design provided.
+- **Interactive Elements**: Includes dynamic behaviors for an engaging user experience.
 
-## Technologies
+## Getting Started
 
-This project uses Vite with React and scss.
+### Prerequisites
+Ensure you have the following installed:
+- Node.js
+- npm (Node Package Manager) or Yarn
 
-### scss
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ZPolikarpov/BMI-Calculator.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd repository-name
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-There is a custom scss template in place. The template is built from Kevin Powells
-[Beyond CSS](https://www.beyondcss.dev) course. Vite handles PurgeCSS to remove unused SCSS code. There's also a PostCSS module that makes the CSS file readable to most relevant browsers. Here's a short overview to the file structure:
+### Running the Project
+1. Start the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+2. Open your browser and navigate to `http://localhost:5173` (or the port specified by Vite).
 
-#### abstracts
+### Building for Production
+1. Generate the production build:
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+2. Serve the production build:
+   ```bash
+   npm run preview
+   # or
+   yarn preview
+   ```
 
-Handles variables, mixins and functions. Use this to make changes to the present design without creating new html or adjusting the present one.
+## File Structure
+```
+.
+├── public/            # Static assets
+├── src/
+│   ├── assets/       # Images, icons, etc.
+│   ├── components/   # Reusable React components
+│   ├── scss/       # SCSS stylesheets
+│   ├── App.jsx       # Main application file
+│   └── main.jsx      # Entry point
+├── index.html        # Main HTML file
+├── package.json      # Dependencies and scripts
+└── vite.config.js    # Vite configuration
+```
 
-#### base
+## Challenges Encountered
+- Implementing a fully responsive layout across various screen sizes.
+- Ensuring pixel-perfect alignment with the Figma design.
+- Managing SCSS styles for modular and maintainable code.
 
-Handles general, project-wide styles. You can find local fonts and css variables here as well.
+## What I Learned
+- Improved my skills in building responsive designs using SCSS and React.
+- Gained experience with Vite for efficient development and build processes.
+- Strengthened my ability to translate Figma designs into code.
 
-#### components
+## Acknowledgments
+- [Frontend Mentor](https://www.frontendmentor.io/) for providing the design challenge.
+- [Vite Documentation](https://vitejs.dev/) for their comprehensive guide.
+- [React Documentation](https://reactjs.org/) for helpful resources.
 
-Handles css for website components, such as buttons or cards. Use when creating new objects, that are (or most likely will be) reused throughout the website.
+## Contributing
+Feel free to fork this repository and submit a pull request if you would like to suggest improvements or fixes.
 
-#### layout
+## License
+This project is licensed under the MIT License.
 
-Handles css for website layouts, such as grids or section. Use when creating new layouts, that are (or most likely will be) reused throughout the website.
 
-#### utilities
-
-Utility classes that you can add to your html without having to create new components or layouts. Use for one-off components/layouts or minor adjustments that wouldn't justify creating a new component/layout.
-
-#### vendor
-
-Folder for 3rd party libraries.
-
-### Vite
-
-The project uses Vite to create a React app. Currently Vite is just used to create the environment and for PurgeCSS and PostCSS.
-
-# Author
-
-Frontend Mentor - [@ZPolikarpov](https://www.frontendmentor.io/profile/ZPolikarpov)
